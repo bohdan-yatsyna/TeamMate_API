@@ -20,11 +20,12 @@ from team.serializers import TeamSerializer
         description=(
             "Endpoint with detailed Team's page by id "
             "for Authenticated users."
-            )
-        ),
+        )
+    ),
     update=extend_schema(
         description=(
-            "Endpoint for updating a specific Team details by id for Admin users."
+            "Endpoint for updating a specific Team details "
+            "by id for Admin users."
         )
     ),
     partial_update=extend_schema(
@@ -34,8 +35,9 @@ from team.serializers import TeamSerializer
         )
     ),
     destroy=extend_schema(
-        description="Endpoint for deleting a specific"
-                    " Team by id for Admin users."
+        description=(
+            "Endpoint for deleting a specific Team by id for Admin users."
+        )
     ),
     list=extend_schema(
         description="Endpoint for listing all Teams for Authenticated users."

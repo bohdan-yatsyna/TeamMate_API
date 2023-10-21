@@ -26,8 +26,9 @@ class RegisterPersonView(generics.CreateAPIView):
         description="Endpoint for updating current Person details by id."
     ),
     patch=extend_schema(
-        description="Endpoint for partial updating "
-                    "current Person details by id."
+        description=(
+            "Endpoint for partial updating current Person details by id."
+        )
     ),
     delete=extend_schema(
         description="Endpoint for deleting current Person's account by id."
@@ -50,8 +51,8 @@ class ManagePersonView(generics.RetrieveUpdateDestroyAPIView):
     retrieve=extend_schema(
         description=(
             "Endpoint with detailed Person's page by id for Admin users."
-            )
-        ),
+        )
+    ),
     update=extend_schema(
         description=(
             "Endpoint for updating a specific "
@@ -65,8 +66,9 @@ class ManagePersonView(generics.RetrieveUpdateDestroyAPIView):
         )
     ),
     destroy=extend_schema(
-        description="Endpoint for deleting a specific "
-                    "Person by id for Admin users."
+        description=(
+            "Endpoint for deleting a specific Person by id for Admin users."
+        )
     ),
     list=extend_schema(
         description="Endpoint for listing all Persons for Admin users."
