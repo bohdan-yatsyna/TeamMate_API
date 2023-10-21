@@ -27,7 +27,8 @@ class AdminPersonViewSet(viewsets.ModelViewSet):
 
         if not request.user.is_superuser:
             self.permission_denied(
-                request, message="Only admin users have access to this endpoint."
+                request,
+                message="Only admin users have access to this endpoint.",
             )
 
     def get_queryset(self):
