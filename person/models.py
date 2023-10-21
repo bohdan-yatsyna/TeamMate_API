@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.utils.translation import gettext as _
 
+from team.models import Team
+
 
 class PersonManager(BaseUserManager):
     """Define a model manager for Person(User) model with no username field."""
@@ -14,7 +16,7 @@ class PersonManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         """Create and save a Person(User) with the given email and password."""
         if not email:
-            raise ValueError("Please enter your email address")
+            raise ValueError("Email is required field")
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -56,8 +58,18 @@ class Person(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
+    team = models.ForeignKey(
+        to=Team,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="people"
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = PersonManager()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}, id: {self.id}"
