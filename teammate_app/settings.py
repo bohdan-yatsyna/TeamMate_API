@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "person",
     "team",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
