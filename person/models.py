@@ -15,6 +15,7 @@ class PersonManager(BaseUserManager):
 
     def _create_user(self, email, password, **extra_fields):
         """Create and save a Person(User) with the given email and password."""
+
         if not email:
             raise ValueError("Email is required field")
 
