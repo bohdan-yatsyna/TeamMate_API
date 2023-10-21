@@ -30,7 +30,7 @@ class ManagePersonSerializer(serializers.ModelSerializer):
             "is_staff",
             "team"
         )
-        read_only_fields = ("is_staff", "email", "id")
+        read_only_fields = ("is_staff", "id")
         extra_kwargs = {
             "password": {
                 "write_only": True,
