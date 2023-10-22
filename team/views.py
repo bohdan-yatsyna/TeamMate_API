@@ -1,3 +1,5 @@
+from typing import List
+
 from drf_spectacular.utils import (
     extend_schema,
     extend_schema_view,
@@ -9,7 +11,7 @@ from team.models import Team
 from team.serializers import TeamSerializer
 
 
-# Only for documentation endpoint details
+# Only for documentation endpoints details
 @extend_schema_view(
     create=extend_schema(
         description=(
@@ -52,7 +54,7 @@ class TeamViewSet(viewsets.ModelViewSet):
         "retrieve": (IsAuthenticated,),
     }
 
-    def get_permissions(self):
+    def get_permissions(self) -> List[IsAdminUser | IsAuthenticated]:
         try:
             return [
                 permission()

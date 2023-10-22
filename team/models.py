@@ -7,5 +7,5 @@ class Team(models.Model):
     class Meta:
         ordering = ["name"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}, ID: {self.id}"

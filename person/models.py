@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Optional
+
 from django.contrib.auth.models import (
     AbstractUser,
     BaseUserManager,
@@ -13,7 +17,12 @@ class PersonManager(BaseUserManager):
 
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
+    def _create_user(
+            self,
+            email: str,
+            password: Optional[str] = None,
+            **extra_fields,
+    ) -> Person:
         """Create and save a Person(User) with the given email and password."""
 
         if not email:
@@ -26,7 +35,12 @@ class PersonManager(BaseUserManager):
 
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(
+            self,
+            email: str,
+            password: Optional[str] = None,
+            **extra_fields,
+    ) -> Person:
         """
         Create and save a regular Person(User)
         with the given email and password.
@@ -37,7 +51,12 @@ class PersonManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(
+            self,
+            email: str,
+            password: str,
+            **extra_fields
+    ) -> Person:
         """
         Create and save a SuperUser(Person) with the given email and password.
         """
@@ -72,5 +91,5 @@ class Person(AbstractUser):
 
     objects = PersonManager()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}, id: {self.id}"

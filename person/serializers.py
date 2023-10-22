@@ -1,5 +1,11 @@
+from __future__ import annotations
+
+from typing import Any, Dict
+
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+
+from person.models import Person
 
 
 class CreatePersonSerializer(serializers.ModelSerializer):
@@ -13,7 +19,7 @@ class CreatePersonSerializer(serializers.ModelSerializer):
             }
         }
 
-    def create(self, validated_data):
+    def create(self, validated_data: Dict[str, Any]) -> Person:
         """Create a new Person(user) with encrypted password and return it"""
         return get_user_model().objects.create_user(**validated_data)
 
@@ -39,7 +45,11 @@ class ManagePersonSerializer(serializers.ModelSerializer):
             }
         }
 
-    def update(self, instance, validated_data):
+    def update(
+            self,
+            instance: Person,
+            validated_data: Dict[str, Any],
+    ) -> Person:
         password = validated_data.pop("password", None)
         instance = super().update(instance, validated_data)
 
