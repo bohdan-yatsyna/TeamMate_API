@@ -75,6 +75,4 @@ password: admin123
 
 # 🕶 DEMO
 ### Documentation with all endpoints:
-![sample_DOCUMENTATION](samples/Endpoints_sample.png)
-
-
+![sample_DOCUMENTATION](samples/Endpoints-sample-jpg.jpg)
