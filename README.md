@@ -75,6 +75,4 @@ password: admin123
 
 # 🕶 DEMO
 ### Documentation with all endpoints:
-![sample_DOCUMENTATION](samples/Endpoints_sample.png)
-
-
+![sample_DOCUMENTATION](https://github.com/bohdan-yatsyna/TeamMate_API/blob/591832117fd79383491e1f31d9a39155aeddcc48/samples/Endpoints-sample-1.png)
