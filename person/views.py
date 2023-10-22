@@ -1,4 +1,8 @@
+from __future__ import annotations
+
 from django.contrib.auth import get_user_model
+from django.db.models import QuerySet
+from django.http import HttpRequest
 from drf_spectacular.utils import (
     extend_schema,
     extend_schema_view,
@@ -6,6 +10,7 @@ from drf_spectacular.utils import (
 from rest_framework import generics, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
 
+from person.models import Person
 from person.serializers import CreatePersonSerializer, ManagePersonSerializer
 
 
@@ -17,7 +22,7 @@ class RegisterPersonView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
-# Only for documentation endpoint details
+# Only for documentation endpoints details
 @extend_schema_view(
     get=extend_schema(
         description="Endpoint with detailed Person page for current user."
@@ -37,11 +42,11 @@ class RegisterPersonView(generics.CreateAPIView):
 class ManagePersonView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ManagePersonSerializer
 
-    def get_object(self):
+    def get_object(self) -> Person:
         return self.request.user
 
 
-# Only for documentation endpoint details
+# Only for documentation endpoints details
 @extend_schema_view(
     create=extend_schema(
         description=(
@@ -79,7 +84,7 @@ class AdminPersonViewSet(viewsets.ModelViewSet):
     serializer_class = ManagePersonSerializer
     permission_classes = (IsAdminUser,)
 
-    def check_permissions(self, request):
+    def check_permissions(self, request: HttpRequest) -> None:
         super().check_permissions(request)
 
         if not request.user.is_superuser:
@@ -88,7 +93,7 @@ class AdminPersonViewSet(viewsets.ModelViewSet):
                 message="Only admin users have access to this endpoint.",
             )
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Person]:
         queryset = self.queryset
 
         if self.action == "list":
