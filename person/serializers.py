@@ -9,6 +9,7 @@ from person.models import Person
 
 
 class CreatePersonSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = get_user_model()
         fields = ("email", "password", "first_name", "last_name", "team")
@@ -25,6 +26,7 @@ class CreatePersonSerializer(serializers.ModelSerializer):
 
 
 class ManagePersonSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = get_user_model()
         fields = (
