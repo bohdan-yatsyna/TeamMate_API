@@ -18,6 +18,7 @@ class RegisterPersonView(generics.CreateAPIView):
     """
     View for Person registering on the portal, Authentication is not required.
     """
+
     serializer_class = CreatePersonSerializer
     permission_classes = (AllowAny,)
 
