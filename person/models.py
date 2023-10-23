@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from django.contrib.auth.models import (
     AbstractUser,
     BaseUserManager,
@@ -20,7 +18,7 @@ class PersonManager(BaseUserManager):
     def _create_user(
             self,
             email: str,
-            password: Optional[str] = None,
+            password: str,
             **extra_fields,
     ) -> Person:
         """Create and save a Person(User) with the given email and password."""
@@ -38,7 +36,7 @@ class PersonManager(BaseUserManager):
     def create_user(
             self,
             email: str,
-            password: Optional[str] = None,
+            password: str,
             **extra_fields,
     ) -> Person:
         """

@@ -54,15 +54,23 @@ class TeamViewSet(viewsets.ModelViewSet):
         "retrieve": (IsAuthenticated,),
     }
 
+    @staticmethod
+    def _instantiate_permissions(
+            permissions: List
+    ) -> List[IsAdminUser | IsAuthenticated]:
+        """Instantiate and return the provided permission classes."""
+
+        return [permission() for permission in permissions]
+
     def get_permissions(self) -> List[IsAdminUser | IsAuthenticated]:
-        try:
-            return [
-                permission()
-                for permission
-                in self.permission_classes_by_action[self.action]
-            ]
-        except KeyError:
-            return [
-                permission()
-                for permission in self.permission_classes_by_action["default"]
-            ]
+        """
+        Get permissions according to the action attribute.
+        Fall back to default permissions if the action isn't recognised.
+        """
+
+        permissions = self.permission_classes_by_action.get(
+            self.action,
+            self.permission_classes_by_action["default"],
+        )
+
+        return self._instantiate_permissions(permissions)
